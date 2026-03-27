@@ -10,6 +10,7 @@ Students often lack clear and actionable roadmaps for building the portfolio . S
 ## Required softwares
 * Python 3.10+
 * PostgreSQL(you can also use mysql but i used Postgres for the current project)
+* WSL(Windows subsystem for linux)(Not an important step)
 
 ## Installation & Setup
 1. **Clone the repository:**
@@ -29,3 +30,6 @@ Students often lack clear and actionable roadmaps for building the portfolio . S
 6. **Run the Server:**
    `python manage.py runserver`
 7. Access the application at `http://127.0.0.1:8000/`
+
+## Steps to run the file
+1 . Use phase 1 file and commands in it  to setup the foundation
