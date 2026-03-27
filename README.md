@@ -10,7 +10,7 @@ Students often lack clear and actionable roadmaps for building the portfolio . S
 ## Required softwares
 * Python 3.10+
 * PostgreSQL(you can also use mysql but i used Postgres for the current project)
-* WSL(Windows subsystem for linux)(Not an important step)
+* WSL(Windows subsystem for linux)
 
 ## Installation & Setup
 1. **Clone the repository:**
