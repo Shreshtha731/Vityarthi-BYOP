@@ -2,20 +2,21 @@
 # SkillPath: Career & Project Intelligence Platform
 
 ## Overview
-SkillPath is a web application designed to help students bridge the gap between learning isolated technical skills and achieving specific career goals. Users can search for a target career path and instantly receive recommended projects to build and skills to acquire. 
+SkillPath is a web application designed to help students bridge the gap between learning isolated technical skills and achieving specific career goals. Users can search for a target career path and instantly receive recommended projects to build and skills to learn it. 
 
 ## Problem Statement
-Students often lack clear, actionable roadmaps for portfolio building. SkillPath centralizes career requirements and suggests practical, real-world project ideas tailored to specific industry roles.
+Students often lack clear and actionable roadmaps for building the portfolio . SkillPath centralize the  career requirements and suggests practical, real-world project ideas for specific industry roles.
 
-## Prerequisites
+## Required softwares
 * Python 3.10+
-* PostgreSQL
+* PostgreSQL(you can also use mysql but i used Postgres for the current project)
 
 ## Installation & Setup
 1. **Clone the repository:**
    `git clone <your-github-repo-url>`
    `cd skillpath-byop`
 2. **Set up a virtual environment:**
+   (To isolate the project from your global system)
    `python -m venv venv`
    `source venv/bin/activate`  # On Windows use: venv\Scripts\activate
 3. **Install dependencies:**
