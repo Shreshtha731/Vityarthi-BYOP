@@ -1,16 +1,18 @@
-# TrendLine
+# TermiMaze: AI Search Visualizer
 
 ## What is this?
-I built this for my CSA2001 BYOP capstone. It's a simple command-line tool that uses Linear Regression to predict the next number in a sequence. 
+I built this for my CSA2001 BYOP capstone. I was having a hard time visualizing how different pathfinding algorithms actually work just by looking at the code. I wanted to see them in action, but I didn't want to deal with the headache of setting up a massive React/Django web app just to draw a grid. 
 
-Instead of using heavy libraries like `scikit-learn` or `pandas`, I just wrote the math algorithm from scratch in Python to prove how the regression actually works under the hood.
+So, I built a visualizer that animates the search process directly inside the Linux terminal. It demonstrates "Uninformed Search" strategies—specifically Breadth-First Search (BFS) and Depth-First Search (DFS).
 
 ## How to run it
-You don't need to install anything special, just Python 3. 
+You don't need to `pip install` anything, it uses pure Python 3 standard libraries.
 
-Clone the repo, open your terminal, and run the script with the `-d` flag followed by your numbers in quotes.
+1. Clone this repo and open your terminal.
+2. Run the script and tell it which algorithm you want to watch using the `-a` flag.
 
-**Example:**
-`python3 trendline.py -d "12, 15, 18, 21"`
+**To watch BFS (searches evenly in all directions):**
+`python3 maze_search.py -a bfs`
 
-It will do the math and predict the next value in the trend.
+**To watch DFS (dives deep down one path before backtracking):**
+`python3 maze_search.py -a dfs`
