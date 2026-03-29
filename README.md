@@ -1,18 +1,21 @@
-# TermiMaze: AI Search Visualizer
+# TermiMaze (CSA2001 Capstone)
 
 ## What is this?
-I built this for my CSA2001 BYOP capstone. I was having a hard time visualizing how different pathfinding algorithms actually work just by looking at the code. I wanted to see them in action, but I didn't want to deal with the headache of setting up a massive React/Django web app just to draw a grid. 
+This is my BYOP project for Fundamentals of AI & ML. 
 
-So, I built a visualizer that animates the search process directly inside the Linux terminal. It demonstrates "Uninformed Search" strategies—specifically Breadth-First Search (BFS) and Depth-First Search (DFS).
+Honestly, trying to picture how search algorithms (like BFS and DFS) actually work just by staring at standard Python output was giving me a headache. I wanted to see them run in real-time, but setting up a whole Django web app just to draw a simple grid felt like way too much work. 
+
+Instead, I wrote this script. It uses basic terminal clearing to actually animate the "Uninformed Search" process right in your console so you can watch it solve the maze step-by-step.
 
 ## How to run it
-You don't need to `pip install` anything, it uses pure Python 3 standard libraries.
+I kept it super simple. You don't need to run any `pip install` commands or download external libraries. As long as you have Python 3 installed, it'll work perfectly.
 
-1. Clone this repo and open your terminal.
-2. Run the script and tell it which algorithm you want to watch using the `-a` flag.
+Just clone the repo, open your terminal (I built and tested this in WSL), and run the script with either the `bfs` or `dfs` flag.
 
-**To watch BFS (searches evenly in all directions):**
+**To watch BFS (Breadth-First Search):**
 `python3 maze_search.py -a bfs`
+*(You'll see it spread out evenly like a ripple to find the absolute shortest path)*
 
-**To watch DFS (dives deep down one path before backtracking):**
+**To watch DFS (Depth-First Search):**
 `python3 maze_search.py -a dfs`
+*(You'll see it immediately dive as deep as possible down one route before backtracking)*
