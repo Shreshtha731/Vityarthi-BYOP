@@ -1,35 +1,23 @@
-# Vityarthi-BYOP
-# SkillPath: Career & Project Intelligence Platform
+# TermiTask 
 
-## Overview
-SkillPath is a web application designed to help students bridge the gap between learning isolated technical skills and achieving specific career goals. Users can search for a target career path and instantly receive recommended projects to build and skills to learn it. 
+## What is this?
+TermiTask is a really simple command-line to-do list. I built this for my BYOP capstone because I was getting annoyed having to constantly open web browsers or other apps just to see what university assignments I had due while I was in the middle of writing code in the terminal.
 
-## Problem Statement
-Students often lack clear and actionable roadmaps for building the portfolio . SkillPath centralize the  career requirements and suggests practical, real-world project ideas for specific industry roles.
+It runs entirely in Python and saves your tasks locally to a JSON file, so you don't need to set up a database.
 
-## Required softwares
-* Python 3.10+
-* PostgreSQL(you can also use mysql but i used Postgres for the current project)
-* WSL(Windows subsystem for linux)
+## How to run it
+You just need Python 3 installed. No weird libraries or `pip install` required.
 
-## Installation & Setup
-1. **Clone the repository:**
-   `git clone <your-github-repo-url>`
-   `cd skillpath-byop`
-2. **Set up a virtual environment:**
-   (To isolate the project from your global system)
-   `python -m venv venv`
-   `source venv/bin/activate`  # On Windows use: venv\Scripts\activate
-3. **Install dependencies:**
-   `pip install -r requirements.txt`
-4. **Database Configuration:**
-   Ensure PostgreSQL is running. Create a database named `skillpath_db`. 
-   Update the `DATABASES` dictionary in `core/settings.py` with your local Postgres credentials.
-5. **Apply Migrations:**
-   `python manage.py migrate`
-6. **Run the Server:**
-   `python manage.py runserver`
-7. Access the application at `http://127.0.0.1:8000/`
+Clone the repo, open your terminal in the folder, and run:
 
-## Steps to run the file
-1 . Use phase 1 file and commands in it  to setup the foundation
+**To add a task:**
+`python3 task_manager.py -a "Finish BYOP Report" -d "Friday"`
+
+**To see your tasks:**
+`python3 task_manager.py -v`
+
+**To see only the stuff you haven't finished yet:**
+`python3 task_manager.py -p`
+
+**To mark something as done (using the ID number):**
+`python3 task_manager.py -c 1`
