@@ -1,61 +1,102 @@
+import time
+import os
 import argparse
+from collections import deque
 
-def get_best_fit_line(x_vals, y_vals):
-    # Basically implementing the y = mx + b math from the ML lectures
-    n = len(x_vals)
+# A simple text-based maze. 
+# 'S' is Start, 'E' is End, '#' are walls, and ' ' are open paths.
+MAZE = [
+    "S #       ",
+    "  #  ###  ",
+    "     #    ",
+    " ### # ###",
+    "   # #   E",
+    "   #     #"
+]
+
+def print_maze(maze, visited=None, path=None):
+    """Clears the terminal and draws the maze with the current search state."""
+    os.system('clear' if os.name == 'posix' else 'cls')
+    print("\n--- AI Maze Search ---")
     
-    # Getting all our sums ready for the regression formula
-    sum_x = sum(x_vals)
-    sum_y = sum(y_vals)
-    sum_xy = sum(x * y for x, y in zip(x_vals, y_vals))
-    sum_x_sq = sum(x ** 2 for x in x_vals)
+    for r in range(len(maze)):
+        row_str = ""
+        for c in range(len(maze[0])):
+            char = maze[r][c]
+            
+            # Color coding for the terminal
+            if char == 'S' or char == 'E':
+                row_str += f"\033[92m{char}\033[0m " # Green
+            elif char == '#':
+                row_str += "█ " # Solid block for walls
+            elif path and (r, c) in path:
+                row_str += "\033[93m*\033[0m " # Yellow star for the final path
+            elif visited and (r, c) in visited:
+                row_str += "\033[90m.\033[0m " # Grey dot for searched areas
+            else:
+                row_str += "  "
+        print(row_str)
+    print("----------------------\n")
+    time.sleep(0.1) # Slow it down so we can see the animation
+
+def get_neighbors(r, c, maze):
+    """Finds all valid moves (up, down, left, right)."""
+    moves = []
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     
-    # The bottom part of the slope fraction
-    bottom = (n * sum_x_sq) - (sum_x ** 2)
-    
-    # Just a failsafe so the program doesn't crash if they enter weird data
-    if bottom == 0:
-        return 0, sum_y / n
-        
-    # Calculate slope (m) and intercept (b)
-    m = ((n * sum_xy) - (sum_x * sum_y)) / bottom
-    b = (sum_y - (m * sum_x)) / n
-    
-    return m, b
+    for dr, dc in directions:
+        nr, nc = r + dr, c + dc
+        # Check if we are inside the maze and not hitting a wall
+        if 0 <= nr < len(maze) and 0 <= nc < len(maze[0]) and maze[nr][nc] != '#':
+            moves.append((nr, nc))
+    return moves
+
+def solve_maze(algo_type):
+    # Find the starting position 'S'
+    start_node = None
+    for r in range(len(MAZE)):
+        for c in range(len(MAZE[0])):
+            if MAZE[r][c] == 'S':
+                start_node = (r, c)
+                break
+
+    # The 'frontier' is what we are checking next.
+    # A Queue (pop left) makes it BFS. A Stack (pop right) makes it DFS.
+    frontier = deque([(start_node, [start_node])]) 
+    visited = set([start_node])
+
+    while frontier:
+        # This is the magic line that changes the algorithm!
+        if algo_type == 'bfs':
+            current, path = frontier.popleft() # BFS: Check oldest first (ripples out)
+        else:
+            current, path = frontier.pop()     # DFS: Check newest first (dives deep)
+
+        r, c = current
+
+        # Did we find the end?
+        if MAZE[r][c] == 'E':
+            print_maze(MAZE, visited, path)
+            print(f"Goal found using {algo_type.upper()} in {len(path)} steps!")
+            return
+
+        # Animate the search process
+        print_maze(MAZE, visited, None)
+
+        for neighbor in get_neighbors(r, c, MAZE):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                frontier.append((neighbor, path + [neighbor]))
+
+    print("No path found!")
 
 def main():
-    parser = argparse.ArgumentParser(description="A simple ML trend predictor.")
-    parser.add_argument("-d", "--data", type=str, required=True, 
-                        help="Put your numbers in quotes separated by commas")
+    parser = argparse.ArgumentParser(description="Terminal Maze Solver using Uninformed Search.")
+    parser.add_argument("-a", "--algo", type=str, choices=['bfs', 'dfs'], required=True, 
+                        help="Choose the algorithm: 'bfs' or 'dfs'")
     
     args = parser.parse_args()
-
-    # Try to clean up the input so it doesn't break if they add spaces
-    try:
-        y_vals = [float(num.strip()) for num in args.data.split(",")]
-    except ValueError:
-        print("Whoops! Make sure you only type numbers and commas.")
-        return
-
-    if len(y_vals) < 2:
-        print("I need at least two numbers to figure out a trend!")
-        return
-
-    # Making dummy X values (1, 2, 3...) to match the Y values they typed
-    x_vals = list(range(1, len(y_vals) + 1))
-    
-    # Run the math
-    slope, intercept = get_best_fit_line(x_vals, y_vals)
-    
-    # Predict what comes next
-    next_x = len(x_vals) + 1
-    prediction = (slope * next_x) + intercept
-
-    print("\n--- Linear Regression Predictor ---")
-    print(f"Your Data: {y_vals}")
-    print(f"The Equation: y = {slope:.2f}x + {intercept:.2f}")
-    print(f"Next Predicted Number: {prediction:.2f}")
-    print("-----------------------------------\n")
+    solve_maze(args.algo)
 
 if __name__ == "__main__":
     main()
