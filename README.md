@@ -1,25 +1,16 @@
-# TermiTask 
+# TrendLine
 
 ## What is this?
-TermiTask is a really simple command-line to-do list. I built this for my BYOP capstone because I was getting annoyed having to constantly open web browsers or other apps just to see what university assignments I had due while I was in the middle of writing code in the terminal.
+I built this for my CSA2001 BYOP capstone. It's a simple command-line tool that uses Linear Regression to predict the next number in a sequence. 
 
-It runs entirely in Python and saves your tasks locally to a JSON file, so you don't need to set up a database.
+Instead of using heavy libraries like `scikit-learn` or `pandas`, I just wrote the math algorithm from scratch in Python to prove how the regression actually works under the hood.
 
 ## How to run it
-You just need Python 3 installed. No weird libraries or `pip install` required.
+You don't need to install anything special, just Python 3. 
 
-Clone the repo, open your terminal in the folder, and run:
+Clone the repo, open your terminal, and run the script with the `-d` flag followed by your numbers in quotes.
 
-**To add a task:**
-`python3 task_manager.py -a "Finish BYOP Report" -d "Friday"`
+**Example:**
+`python3 trendline.py -d "12, 15, 18, 21"`
 
-**To see your tasks:**
-`python3 task_manager.py -v`
-
-**To see only the stuff you haven't finished yet:**
-`python3 task_manager.py -p`
-
-**To mark something as done (using the ID number):**
-`python3 task_manager.py -c 1`
-
-If the terminal shows the color-coded output and updates the checkbox to [x] then it shows that the task is completed.
+It will do the math and predict the next value in the trend.
