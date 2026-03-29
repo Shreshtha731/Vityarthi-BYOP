@@ -21,3 +21,5 @@ Clone the repo, open your terminal in the folder, and run:
 
 **To mark something as done (using the ID number):**
 `python3 task_manager.py -c 1`
+
+If the terminal shows the color-coded output and updates the checkbox to [x] then it shows that the task is completed.
